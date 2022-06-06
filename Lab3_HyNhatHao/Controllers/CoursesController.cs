@@ -29,8 +29,14 @@ namespace Lab3_HyNhatHao.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModels)
         {
+            if (!ModelState.IsValid)
+            {
+                viewModels.Categories = _dbContext.Categories.ToList();
+                return View("Create", viewModels);
+            }
             var course = new Course
             {
                 LecturerId = User.Identity.GetUserId(),
@@ -39,7 +45,7 @@ namespace Lab3_HyNhatHao.Controllers
                 Place = viewModels.Place
             };
             _dbContext.Courses.Add(course);
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges();   
 
             return RedirectToAction("Index", "Home");
         }

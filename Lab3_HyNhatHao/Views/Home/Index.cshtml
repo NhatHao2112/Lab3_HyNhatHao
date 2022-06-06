@@ -8,7 +8,20 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
+@model IEnumerable<Lab3_HyNhatHao.Models.Course>
+    @{ 
+        ViewBag.Tittle = "Home Page";
+    }
 <div class="row">
+    <ul>
+        @foreach ( var course in Model)
+            {
+                <li>
+                    @course.DateTime - @course.Lecturer.Name
+                </li>
+            }
+    </ul>
+</div>
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
