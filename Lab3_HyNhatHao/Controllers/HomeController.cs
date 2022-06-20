@@ -23,12 +23,8 @@ namespace Lab3_HyNhatHao.Controllers
                 .Include(c => c.Category)
                 .Where(c => c.DateTime > DateTime.Now);
 
-            var viewModel = new CoursesViewModel
-            {
-                UpcommingCourses = upcommingCourses,
-                ShowAction = User.Identity.IsAuthenticated
-            };
-            return View(viewModel);
+
+            return View(upcommingCourses);
         }
 
         public ActionResult About()
